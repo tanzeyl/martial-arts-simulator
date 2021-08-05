@@ -7,6 +7,9 @@ let loadImage = (src, callback) => {
   img.src = src;
 };
 
+document.getElementById("myCanvas").style.background =
+  "url('https://github.com/ssharma2303/Martial-Arts/blob/main/images/background.jpg')";
+
 let imagePath = (frameNumber, animation) => {
   return "images/" + animation + "/" + frameNumber + ".png";
 };
@@ -15,31 +18,43 @@ let frames = {
   idle: [1, 2, 3, 4, 5, 6, 7, 8],
   kick: [1, 2, 3, 4, 5, 6, 7],
   punch: [1, 2, 3, 4, 5, 6, 7],
+  backward: [1, 2, 3, 4, 5, 6],
+  block: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  forward: [1, 2, 3, 4, 5, 6],
 };
 
 let loadImages = (callback) => {
-  let images = { idle: [], kick: [], punch: [] };
+  let images = {
+    idle: [],
+    kick: [],
+    punch: [],
+    backward: [],
+    forward: [],
+    block: [],
+  };
   let imageToLoad = 0;
-  ["idle", "kick", "punch"].forEach((animation) => {
-    let animationFrames = frames[animation];
-    imageToLoad = imageToLoad + animationFrames.length;
+  ["idle", "kick", "punch", "backward", "block", "forward"].forEach(
+    (animation) => {
+      let animationFrames = frames[animation];
+      imageToLoad = imageToLoad + animationFrames.length;
 
-    animationFrames.forEach((frameNumber) => {
-      let path = imagePath(frameNumber, animation);
-      loadImage(path, (image) => {
-        images[animation][frameNumber - 1] = image;
-        imageToLoad--;
-        if (imageToLoad === 0) callback(images);
+      animationFrames.forEach((frameNumber) => {
+        let path = imagePath(frameNumber, animation);
+        loadImage(path, (image) => {
+          images[animation][frameNumber - 1] = image;
+          imageToLoad--;
+          if (imageToLoad === 0) callback(images);
+        });
       });
-    });
-  });
+    }
+  );
 };
 
 let animate = (ctx, images, animation, callback) => {
   images[animation].forEach((image, index) => {
     setTimeout(() => {
-      ctx.clearRect(0, 0, 500, 500);
-      ctx.drawImage(image, 0, 0, 500, 500);
+      ctx.clearRect(500, 50, 250, 300);
+      ctx.drawImage(image, 500, 50, 250, 300);
     }, index * 100);
   });
   setTimeout(callback, images[animation].length * 100);
@@ -62,6 +77,15 @@ loadImages((images) => {
   };
   document.getElementById("punch").onclick = () => {
     queuedAnimation.push("punch");
+  };
+  document.getElementById("forward").onclick = () => {
+    queuedAnimation.push("forward");
+  };
+  document.getElementById("backword").onclick = () => {
+    queuedAnimation.push("backword");
+  };
+  document.getElementById("block").onclick = () => {
+    queuedAnimation.push("block");
   };
 
   document.addEventListener("keyup", (event) => {
