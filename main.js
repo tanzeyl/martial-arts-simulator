@@ -46,7 +46,30 @@ let animate = (ctx, images, animation, callback) => {
 };
 
 loadImages((images) => {
-  animate(ctx, images, "punch", () => {
-    console.log("Done");
+  let queuedAnimation = [];
+  let aux = () => {
+    let selectedAnimation;
+    if (queuedAnimation.length === 0) {
+      selectedAnimation = "idle";
+    } else {
+      selectedAnimation = queuedAnimation.shift();
+    }
+    animate(ctx, images, selectedAnimation, aux);
+  };
+  aux();
+  document.getElementById("kick").onclick = () => {
+    queuedAnimation.push("kick");
+  };
+  document.getElementById("punch").onclick = () => {
+    queuedAnimation.push("punch");
+  };
+
+  document.addEventListener("keyup", (event) => {
+    const key = event.key;
+    if (key === "ArrowLeft") {
+      queuedAnimation.push("kick");
+    } else if (key === "ArrowRight") {
+      queuedAnimation.push("punch");
+    }
   });
 });
