@@ -1,3 +1,13 @@
+let myFunction = () => {
+  var person = prompt("Please enter your name", "Harry Potter");
+  if (person != null) {
+    document.getElementById("demo").innerHTML =
+      "Hello " +
+      person +
+      "! Let's start. Click on the buttons below to learn some cool moves! ";
+  }
+};
+
 let c = document.getElementById("myCanvas");
 let ctx = c.getContext("2d");
 
@@ -6,9 +16,6 @@ let loadImage = (src, callback) => {
   img.onload = () => callback(img);
   img.src = src;
 };
-
-document.getElementById("myCanvas").style.background =
-  "url('https://github.com/ssharma2303/Martial-Arts/blob/main/images/background.jpg')";
 
 let imagePath = (frameNumber, animation) => {
   return "images/" + animation + "/" + frameNumber + ".png";
@@ -81,8 +88,8 @@ loadImages((images) => {
   document.getElementById("forward").onclick = () => {
     queuedAnimation.push("forward");
   };
-  document.getElementById("backword").onclick = () => {
-    queuedAnimation.push("backword");
+  document.getElementById("backward").onclick = () => {
+    queuedAnimation.push("backward");
   };
   document.getElementById("block").onclick = () => {
     queuedAnimation.push("block");
@@ -91,9 +98,15 @@ loadImages((images) => {
   document.addEventListener("keyup", (event) => {
     const key = event.key;
     if (key === "ArrowLeft") {
-      queuedAnimation.push("kick");
+      queuedAnimation.push("backward");
     } else if (key === "ArrowRight") {
+      queuedAnimation.push("forward");
+    } else if (key === "ArrowUp") {
+      queuedAnimation.push("kick");
+    } else if (key === "ArrowDown") {
       queuedAnimation.push("punch");
+    } else if (key === "Enter") {
+      queuedAnimation.push("block");
     }
   });
 });

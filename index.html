@@ -1,20 +1,65 @@
 <!DOCTYPE html>
-<html>
-  <head> </head>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Martial Arts training</title>
+  </head>
   <body>
     <div>
-      <center>
-        <br /><br /><br /><br /><br /><br />
-        <canvas id="myCanvas" width="1350px" height="510px"></canvas>
-      </center>
-      <center>
-        <button id="backword">Backword</button>
-        <button id="kick">Kick</button>
-        <button id="block">Block</button>
-        <button id="punch">Punch</button>
-        <button id="forward">Forward</button>
-      </center>
+      <h1>Martial Arts Training</h1>
+      <button id="demo" onclick="myFunction()" class="mainButton">
+        Click here to start
+      </button>
     </div>
+    <canvas
+      id="myCanvas"
+      height="350px"
+      width="1350px"
+      style="border: 2px solid white"
+    ></canvas>
+    <p>
+      <button style="margin-left: 400px" id="kick" class="controlButton">
+        Kick (Up Arrow Key)
+      </button>
+      <button id="punch" class="controlButton">Punch (Down Arrow Key)</button>
+    </p>
+    <button style="margin-left: 260px" id="backward" class="controlButton">
+      Backward (Left Arrow Key)
+    </button>
+    <button id="forward" class="controlButton">
+      Forward (Right Arrow Key)
+    </button>
+    <button id="block" class="controlButton">Block (Enter Key)</button>
+
     <script type="text/javascript" src="main.js"></script>
+    <style>
+      body {
+        background-color: rgba(118, 93, 105, 1);
+      }
+
+      button {
+        background-color: black; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 10px;
+      }
+      div {
+        border: 2px solid;
+        background-color: rgba(242, 38, 19, 1);
+        padding: 2px 0px 2px 5px;
+        text-align: center;
+      }
+      h1 {
+        font-family: sans-serif, "Times New Roman", Times, serif;
+        color: white;
+      }
+    </style>
   </body>
 </html>
